@@ -1,0 +1,5 @@
+[runner]
+fastReruns = true
+
+[theme]
+primaryColor = "#1c83e1"

@@ -1,0 +1,26 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[requires]
+python_version = "3.9"
+
+[packages]
+streamlit = ">=1.10.0"  # Requires multipage app
+requests = "*"
+matplotlib = "*"
+millify = "*"
+plost = {editable = true, ref = "streamlit-style", git = "https://github.com/jrieke/plost"} # Docs https://share.streamlit.io/jrieke/plost/streamlit-style/
+numpy = "*"
+snowflake-connector-python = ">=2.7.8"
+sqlparse = "*"
+
+[dev-packages]
+black = "*"  # Pretty formatting of Python code
+pynvim = "*" # Allows nvim users to use black formatting
+pre-commit = "*"
+flake8 = "*"
+flake8-bugbear = "*"
+typed-ast = ">=1.5.0"
+mypy = "*"
