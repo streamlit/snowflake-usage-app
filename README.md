@@ -31,7 +31,7 @@ password = "..."
 
 3. **Run the app locally.** Simply run:
 ```
-pipenv run streamlit run 00_Usage_Insights_app.py
+pipenv run streamlit run Home.py
 ```
 
 🎊 Your browser should now be opened with the Streamlit app running locally!
