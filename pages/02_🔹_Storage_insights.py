@@ -67,25 +67,58 @@ def main():
 
     st.altair_chart(chart, use_container_width=True)
 
+    # st.write(
+    #     df_resampled.groupby(
+    #         ["OBJECT_NAME", "USAGE_DATE"]
+    #     ).DATABASE_BYTES.mean()
+    # )
+
     # Group by
-    agg_config = {"DATABASE_BYTES": "sum"}
-    df_grouped = df.groupby("OBJECT_NAME").agg(agg_config).reset_index()
+    df_grouped = (
+        df.groupby(["OBJECT_NAME", "USAGE_DATE"])
+        .DATABASE_BYTES.mean()
+        .reset_index()
+        .groupby("OBJECT_NAME")
+        .mean()
+        .reset_index()
+    )
+    # agg_config = {"DATABASE_BYTES": "sum"}
+    # df_grouped = df.groupby("OBJECT_NAME").agg(agg_config).reset_index()
+
+    # Sort and pretty print credits
+    df_grouped_top_10 = df_grouped.sort_values(
+        by="DATABASE_BYTES", ascending=False
+    ).head(10)
+
+    df_grouped_top_10["AVG_DAILY_STORAGE_SIZE"] = df_grouped_top_10[
+        "DATABASE_BYTES"
+    ].apply(gui.pretty_print_bytes)
 
     # Pretty print BYTES
-    value_pretty_print_column = "DATABASE_BYTES_PP"
-    df_grouped[value_pretty_print_column] = df_grouped["DATABASE_BYTES"].apply(
-        gui.pretty_print_bytes
-    )
+    # value_pretty_print_column = "DATABASE_BYTES_PP"
+    # df_grouped[value_pretty_print_column] = df_grouped["DATABASE_BYTES"].apply(
+    # gui.pretty_print_bytes
+    # )
+    # df_grouped["AVG_DAILY_STORAGE_SIZE"] = df_grouped[
+    #     "DATABASE_BYTES_PP"
+    # ].apply(lambda x: x + " " * 10)
+
+    # df_grouped = df_grouped.sort_values(
+    #     by="DATABASE_BYTES",
+    #     ascending=False,
+    # )
 
     gui.subsubheader(
-        "**Storage** spend",
-        " Grouped by OBJECT_NAME",
+        "**Storage** spend per day",
+        "Average",
+        "Grouped by OBJECT_NAME",
         "Top 10",
     )
 
     st.dataframe(
-        gui.dataframe_with_podium(df_grouped, sort_by="DATABASE_BYTES"),
-        width=600,
+        gui.dataframe_with_podium(
+            df_grouped_top_10[["OBJECT_NAME", "AVG_DAILY_STORAGE_SIZE"]],
+        ),
     )
 
 

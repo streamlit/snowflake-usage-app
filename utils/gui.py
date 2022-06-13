@@ -41,14 +41,20 @@ def underline(text: str, color: str = BLUE_COLOR) -> str:
     return f"""<strong> <u style="{style}"> {text}</u> </strong>"""
 
 
-def dataframe_with_podium(df: pd.DataFrame, sort_by: str) -> pd.DataFrame:
+def dataframe_with_podium(
+    df: pd.DataFrame, sort_by: str = None
+) -> pd.DataFrame:
     """Replaces dataframe indices 1, 2, 3 with medals 🥇, 🥈, 🥉"""
-    # Sort dataframe and take top-10
-    sorted_df = (
-        df.sort_values(by=sort_by, ascending=False)
-        .reset_index(drop=True)
-        .head(10)
-    )
+
+    if sort_by:
+        # Sort dataframe and take top-10
+        sorted_df = (
+            df.sort_values(by=sort_by, ascending=False)
+            .reset_index(drop=True)
+            .head(10)
+        )
+    else:
+        sorted_df = df.head(10).copy()
 
     # Replace index to highlight the podium (gold, metal, bronze)
     new_index = ["🥇", "🥈", "🥉"] + list(map(str, range(4, 11)))
@@ -136,7 +142,7 @@ def pretty_print_bytes(size_bytes: int, binary: bool = False) -> str:
     i = int(math.floor(math.log(size_bytes, basis)))
     p = math.pow(basis, i)
     s = round(size_bytes / p, 2)
-    return "%s %s" % (s, size_name[i])
+    return "%s %s" % (s, size_name[i]) + " " * 8
 
 
 def pretty_print_seconds(seconds: int) -> str:

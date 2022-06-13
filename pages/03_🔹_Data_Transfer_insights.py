@@ -98,11 +98,14 @@ def main():
         .reset_index()
     )
 
-    # Pretty print BYTES
-    pretty_print_column = "BYTES_TRANSFERRED_PP"
-    df_grouped[pretty_print_column] = df_grouped["BYTES_TRANSFERRED"].apply(
-        gui.pretty_print_bytes
-    )
+    # Sort and pretty print credits
+    df_grouped_top_10 = df_grouped.sort_values(
+        by="BYTES_TRANSFERRED", ascending=False
+    ).head(10)
+
+    df_grouped_top_10["BYTES_TRANSFERRED"] = df_grouped_top_10[
+        "BYTES_TRANSFERRED"
+    ].apply(gui.pretty_print_bytes)
 
     gui.subsubheader(
         "**Storage** spend",
@@ -111,7 +114,16 @@ def main():
     )
 
     st.dataframe(
-        gui.dataframe_with_podium(df_grouped, sort_by="BYTES_TRANSFERRED"),
+        gui.dataframe_with_podium(
+            df_grouped_top_10[
+                [
+                    "TRANSFER_TYPE",
+                    "TARGET_CLOUD",
+                    "TARGET_REGION",
+                    "BYTES_TRANSFERRED",
+                ]
+            ]
+        ),
         width=600,
     )
 

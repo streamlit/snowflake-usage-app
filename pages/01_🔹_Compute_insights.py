@@ -93,10 +93,14 @@ def main():
             df.groupby(["NAME", "SERVICE_TYPE"]).agg(agg_config).reset_index()
         )
 
-        # Pretty print credits
-        df_grouped["CREDITS_USED_PP"] = df_grouped["CREDITS_USED"].apply(
-            gui.pretty_print_credits
-        )
+        # Sort and pretty print credits
+        df_grouped_top_10 = df_grouped.sort_values(
+            by="CREDITS_USED", ascending=False
+        ).head(10)
+
+        df_grouped_top_10["CREDITS_USED"] = df_grouped_top_10[
+            "CREDITS_USED"
+        ].apply(gui.pretty_print_credits)
 
         gui.subsubheader(
             "**Compute** spend",
@@ -106,9 +110,8 @@ def main():
 
         st.dataframe(
             gui.dataframe_with_podium(
-                df_grouped,
-                sort_by="CREDITS_USED",
-            )[["NAME", "CREDITS_USED", "SERVICE_TYPE", "CREDITS_USED_PP"]],
+                df_grouped_top_10,
+            )[["NAME", "SERVICE_TYPE", "CREDITS_USED"]],
             width=600,
         )
 
