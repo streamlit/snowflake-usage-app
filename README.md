@@ -1,10 +1,10 @@
-<img src="https://user-images.githubusercontent.com/7164864/172889064-79428a48-07f8-4de0-ba70-c5cf101f3411.png" width="200"></img>
-
 # Streamlit demo: 🌀 The Snowflake Usage Insights app
 
 This app provides insights on a demo Snowflake account usage.
 
 It was made using :balloon: [Streamlit](https://www.streamlit.io) and the :snowflake: [Snowflake Python connector](https://github.com/snowflakedb/snowflake-connector-python)!
+
+<img width="200" alt="CleanShot 2022-06-13 at 23 03 10@2x" src="https://user-images.githubusercontent.com/7164864/173445058-f2a3302c-a8fc-463f-bed2-0c18155310d0.png">
 
 ### Can I use this app with my own Snowflake account?
 
