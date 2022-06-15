@@ -27,6 +27,7 @@ credentials. The file should look like this:
 user = "..."
 account = "..."
 password = "..."
+warehouse = "..."
 ```
 
 3. **Run the app locally.** Simply run:
