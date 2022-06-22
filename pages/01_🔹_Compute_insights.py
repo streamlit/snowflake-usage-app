@@ -134,11 +134,9 @@ def main():
 
     # Add filtering widget per Warehouse name
     warehouses = warehouse_usage_hourly.WAREHOUSE_NAME.unique()
-    task_wh_index = warehouses.tolist().index("TASK_WH")  # default: TASK_WH
     selected_warehouse = st.selectbox(
         "Choose warehouse",
         warehouses.tolist(),
-        task_wh_index if task_wh_index != -1 else 0,
     )
 
     # Filter accordingly
@@ -188,11 +186,9 @@ def main():
 
     # Add filtering widget per Warehouse name
     warehouses = queries_data.WAREHOUSE_NAME.dropna().unique().tolist()
-    task_wh_index = warehouses.index("LOAD_WH")
     selected_warehouse = st.selectbox(
         "Choose warehouse",
         warehouses,
-        task_wh_index if task_wh_index != -1 else 0,
     )
 
     # Filter accordingly
