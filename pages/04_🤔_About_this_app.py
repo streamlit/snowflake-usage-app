@@ -1,10 +1,8 @@
 import streamlit as st
 
-st.set_page_config(
-    page_title="Usage Insights app - About", page_icon="🤔", layout="centered"
-)
+st.set_page_config(page_title="Usage Insights app - About", page_icon="🤔", layout="centered")
 
-from utils import gui
+from app_utils import gui
 
 gui.icon("🤔")
 st.title("About this app")

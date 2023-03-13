@@ -6,9 +6,9 @@ st.set_page_config(
     layout="centered",
 )
 
-from utils import charts, gui, processing
-from utils import snowflake_connector as sf
-from utils import sql
+from app_utils import charts, gui, processing
+from app_utils import snowflake_connector as sf
+from app_utils import sql
 
 
 def main():

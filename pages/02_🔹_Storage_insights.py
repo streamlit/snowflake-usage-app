@@ -1,16 +1,13 @@
 import streamlit as st
 
-st.set_page_config(
-    page_title="Usage Insights app - Storage", page_icon="🔹", layout="centered"
-)
+st.set_page_config(page_title="Usage Insights app - Storage", page_icon="🔹", layout="centered")
 
-from utils import charts, gui, processing
-from utils import snowflake_connector as sf
-from utils import sql
+from app_utils import charts, gui, processing
+from app_utils import snowflake_connector as sf
+from app_utils import sql
 
 
 def main():
-
     # Date selector widget
     with st.sidebar:
         date_from, date_to = gui.date_selector()
@@ -21,9 +18,7 @@ def main():
 
     # Get data
     query = sql.STORAGE_QUERY
-    df = sf.sql_to_dataframe(
-        query.format(date_from=date_from, date_to=date_to)
-    )
+    df = sf.sql_to_dataframe(query.format(date_from=date_from, date_to=date_to))
 
     # Get consumption
     consumption = df["DATABASE_BYTES"].sum()
@@ -86,13 +81,11 @@ def main():
     # df_grouped = df.groupby("OBJECT_NAME").agg(agg_config).reset_index()
 
     # Sort and pretty print credits
-    df_grouped_top_10 = df_grouped.sort_values(
-        by="DATABASE_BYTES", ascending=False
-    ).head(10)
+    df_grouped_top_10 = df_grouped.sort_values(by="DATABASE_BYTES", ascending=False).head(10)
 
-    df_grouped_top_10["AVG_DAILY_STORAGE_SIZE"] = df_grouped_top_10[
-        "DATABASE_BYTES"
-    ].apply(gui.pretty_print_bytes)
+    df_grouped_top_10["AVG_DAILY_STORAGE_SIZE"] = df_grouped_top_10["DATABASE_BYTES"].apply(
+        gui.pretty_print_bytes
+    )
 
     # Pretty print BYTES
     # value_pretty_print_column = "DATABASE_BYTES_PP"
