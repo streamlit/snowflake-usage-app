@@ -90,9 +90,6 @@ def get_queries_data(
     queries_data["DURATION_SECS_PP"] = queries_data.DURATION_SECS.apply(
         gui.pretty_print_seconds
     )
-    queries_data["QUERY_TEXT_PP"] = queries_data.QUERY_TEXT.apply(
-        gui.pretty_print_sql_query
-    )
     return queries_data
 
 
