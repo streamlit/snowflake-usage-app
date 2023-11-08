@@ -21,7 +21,7 @@ def get_bar_chart(
     date_column: str,
     value_column: str,
     color: str = gui.BLUE_COLOR,
-) -> alt.vegalite.v4.api.Chart:
+) -> alt.Chart:
 
     config = {
         "x": alt.X(f"yearmonthdate({date_column})", title="Day"),
@@ -45,7 +45,7 @@ def get_bar_chart(
 def get_histogram_chart(
     df: pd.DataFrame,
     date_column: str,
-) -> alt.vegalite.v4.api.Chart:
+) -> alt.Chart:
 
     chart = (
         alt.Chart(df)
@@ -77,7 +77,7 @@ def get_histogram_chart(
 @st.experimental_memo(ttl=60 * 60 * 12)
 def get_scatter_chart(
     df: pd.DataFrame,
-):
+) -> alt.Chart:
     chart = (
         alt.Chart(df)
         .mark_circle(
