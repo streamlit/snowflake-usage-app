@@ -12,7 +12,7 @@ TIME_TO_LIVE = 60 * 60 * 6  # 6 hours caching
 
 
 # Share the connector across all users connected to the app
-@st.experimental_singleton()
+@st.cache_resource
 def get_connector(
     secrets_key: str = "snowflake",
     input_params: Dict[str, Any] = None,
@@ -64,7 +64,7 @@ cur = snowflake_connector.cursor()
 cur.execute(f"use warehouse {st.secrets.sf_usage_app.warehouse};")
 
 
-@st.experimental_memo(ttl=TIME_TO_LIVE)
+@st.cache_data(ttl=TIME_TO_LIVE)
 def sql_to_dataframe(sql_query: str) -> pd.DataFrame:
     data = pd.read_sql(
         sql_query,
@@ -73,7 +73,7 @@ def sql_to_dataframe(sql_query: str) -> pd.DataFrame:
     return data
 
 
-@st.experimental_memo(ttl=TIME_TO_LIVE)
+@st.cache_data(ttl=TIME_TO_LIVE)
 def get_queries_data(
     date_from: datetime.date,
     date_to: datetime.date,
