@@ -3,7 +3,7 @@ import pandas as pd
 import streamlit as st
 
 
-@st.experimental_memo
+@st.cache_data
 def resample_by_day(df: pd.DataFrame, date_column: str) -> pd.DataFrame:
     """Resample a dataframe's date_column by day, summing values."""
     return (
@@ -11,7 +11,7 @@ def resample_by_day(df: pd.DataFrame, date_column: str) -> pd.DataFrame:
     )
 
 
-@st.experimental_memo
+@st.cache_data
 def resample_date_period(
     df: pd.DataFrame, date_from: str, date_to: str, value_column: str
 ) -> pd.DataFrame:
@@ -27,7 +27,7 @@ def resample_date_period(
     )
 
 
-@st.experimental_memo
+@st.cache_data
 def apply_log1p(df: pd.DataFrame, columns: list) -> pd.DataFrame:
     """Apply log1p on input columns and store into new columns in input df
     with suffix _LOG."""
