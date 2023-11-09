@@ -218,7 +218,7 @@ def main():
         with st.expander("🔎 Zoom into top-3 longest queries in detail"):
             for query in queries_podium_df.itertuples():
                 st.caption(f"{query.Index} {query.DURATION_SECS_PP}")
-                st.code(query.QUERY_TEXT_PP, "sql")
+                st.code(query.QUERY_TEXT, "sql")
 
     gui.space(1)
     st.write("Time-histograms of **aggregate queries duration** (in secs)")
