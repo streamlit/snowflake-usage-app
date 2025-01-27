@@ -1,3 +1,8 @@
+> [!NOTE]
+> Discover many more Streamlit & Snowflake apps in the [snowflake-demo-streamlit]([url](https://github.com/Snowflake-Labs/snowflake-demo-streamlit)) repository
+
+---
+
 # Streamlit demo: 🌀 The Snowflake Usage Insights app
 
 This app provides insights on a demo Snowflake account usage.
