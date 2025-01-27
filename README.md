@@ -1,5 +1,5 @@
 > [!NOTE]
-> Discover many more Streamlit & Snowflake apps in the [snowflake-demo-streamlit]([url](https://github.com/Snowflake-Labs/snowflake-demo-streamlit)) repository
+> Discover many more Streamlit & Snowflake apps in the [snowflake-demo-streamlit](https://github.com/Snowflake-Labs/snowflake-demo-streamlit) repository
 
 ---
 
